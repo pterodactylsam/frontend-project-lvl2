@@ -7,7 +7,9 @@ program
   .name("gendiff")
   .usage("[options] <filepath1> <filepath2>")
   .description('Compares two configuration files and shows a difference.')
-  .option('-V, --version', 'output the version number')
-  .option('-f, --format [type]', 'output format (default: "stylish")')
+  .option('-f, --format <type>', 'output format')
+  .version('0.1.0')
+  .arguments('<filepath1> <filepath2>');
+  
 
 program.parse(process.argv);
