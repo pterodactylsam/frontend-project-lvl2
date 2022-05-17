@@ -12,32 +12,26 @@ export const getObjectFromJson = (file) => {
 }
 
 export const calculateTheDifferences = (jsonFile1, jsonFile2) => {
-    const file1 = getObjectFromJson(jsonFile1)
-    const file2 = getObjectFromJson(jsonFile2)
+    const obj1 = getObjectFromJson(jsonFile1)
+    const obj2 = getObjectFromJson(jsonFile2)
 
-    const keysFile1 = Object.keys(file1);
-    const keysFile2 = Object.keys(file2);
+    const keysObj1 = Object.keys(obj1);
+    const keysObj2 = Object.keys(obj2);
 
-    const sortedKeys = _.sortBy(_.uniq(keysFile1.concat(keysFile2)))
-    const result = sortedKeys.map((item) => {
-        if (keysFile1.includes(item) && !keysFile2.includes(item)) {
-            const prefix = '- '
-            const value = file1[item]
-            return [prefix + item + ": " + value]
-        } else if (keysFile1.includes(item) && keysFile2.includes(item) && file1[item] == file2[item]) {
-            const prefix = '  '
-            const value = file1[item]
-            return [prefix + item + ": " + value]
-        } else if (keysFile1.includes(item) && keysFile2.includes(item) && file1[item] != file2[item]) {
-            const prefixFile1 = '- '
-            const prefixFile2 = '+ '
-            const valueFile1 = file1[item]
-            const valueFile2 = file2[item]
-            return [prefixFile1 + item + ': ' + valueFile1, prefixFile2 + item + ': ' + valueFile2]
-        } else if (!keysFile1.includes(item) && keysFile2.includes(item)) {
-            const prefix = '+ '
-            const value = file2[item]
-            return [prefix + item + ': ' + value]
+    const sortedKeys = _.sortBy(_.uniq(keysObj1, keysObj2))
+    const result = sortedKeys.map((key) => {
+        if (!_.has(obj1, key)) {
+            return { key, state: 'added', value: obj2[key] }
+        }
+        else if (!_.has(obj2, key)) {
+            return { key, state: 'removed', value: obj1[key] }
+        }
+        else if (_.has(obj1, key) && _.has(obj2, key)) {
+            return { key, state: 'notChanged', value: obj1[key] }
+        } else if (typeof obj1[key] === 'object' && obj1[key] !== null && typeof obj2[key] === 'object' && obj2[key] !== null) {
+            return { key, state: 'notChanged', value: calculateTheDifferences(obj1[item], obj2[item])}
+        } else {
+            return { key, state: 'changed', value1: obj1[key], value2: obj2[key] }
         }
     })
     console.log(result)
