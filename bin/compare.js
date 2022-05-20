@@ -18,22 +18,25 @@ export const calculateTheDifferences = (jsonFile1, jsonFile2) => {
     const keysObj1 = Object.keys(obj1);
     const keysObj2 = Object.keys(obj2);
 
-    const sortedKeys = _.sortBy(_.uniq(keysObj1, keysObj2))
+    const sortedKeys = _.sortBy(_.uniq(_.union(keysObj1, keysObj2)))
     const result = sortedKeys.map((key) => {
         if (!_.has(obj1, key)) {
             return { key, state: 'added', value: obj2[key] }
         }
-        else if (!_.has(obj2, key)) {
-            return { key, state: 'removed', value: obj1[key] }
+        if (!_.has(obj2, key)) {
+            return { key, state: 'deleted', value: obj1[key] }
         }
-        else if (_.has(obj1, key) && _.has(obj2, key)) {
-            return { key, state: 'notChanged', value: obj1[key] }
-        } else if (typeof obj1[key] === 'object' && obj1[key] !== null && typeof obj2[key] === 'object' && obj2[key] !== null) {
-            return { key, state: 'notChanged', value: calculateTheDifferences(obj1[item], obj2[item])}
-        } else {
+        if (_.has(obj1, key) && _.has(obj2, key) && obj1[key] !== obj2[key]) {
             return { key, state: 'changed', value1: obj1[key], value2: obj2[key] }
         }
+        if (typeof obj1[key] === 'object' && obj1[key] !== null && typeof obj2[key] === 'object' && obj2[key] !== null) {
+            return { key, state: 'nested', value: calculateTheDifferences(obj1[item], obj2[item])}
+        } 
+        if (_.has(obj1, key) && _.has(obj2, key)) {
+            return { key, state: 'notChanged', value: obj1[key] }
+        } 
     })
+    
     console.log(result)
     return result
 }
