@@ -37,8 +37,36 @@ export const calculateTheDifferences = (jsonFile1, jsonFile2) => {
         } 
     })
     
-    console.log(result)
     return result
 }
 
-calculateTheDifferences('../file1.json', '../file2.json')
+export const printTheDifferents = (tree) => {
+    const tab = '   '
+    const treeObj = tree.map(({ key, state, value, value1, value2 }) => {
+        if (state === 'added') {
+            state = '+'
+            return `${state} ${key}: ${value}`
+        }
+        if (state === 'deleted') {
+            state = '-'
+            return `${state} ${key}: ${value}`
+        }
+        if (state === 'notChanged') {
+            state = ' '
+            return `${state} ${key}: ${value}`
+        }
+        if (state === 'changed') {
+            state = ['-', '+']
+            return `${state[0]} ${key}: ${value1} \n${tab}${state[1]} ${key}: ${value2}`
+        }
+    })
+    
+    console.log('{')
+    const result = treeObj.map((value) => {
+        console.log(`${tab}${value}`)
+    }) 
+    console.log('}')
+    
+}
+
+// printTheDifferents(calculateTheDifferences('../file1.json', '../file2.json'))

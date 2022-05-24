@@ -4,7 +4,7 @@
   "description": "[![Actions Status](https://github.com/pterodactylsam/frontend-project-lvl2/workflows/hexlet-check/badge.svg)](https://github.com/pterodactylsam/frontend-project-lvl2/actions)",
   "main": "index.js",
   "type": "module",
-  "bin": { 
+  "bin": {
     "gendiff": "bin/gendiff.js"
   },
   "scripts": {
@@ -21,6 +21,7 @@
   },
   "homepage": "https://github.com/pterodactylsam/frontend-project-lvl2#readme",
   "dependencies": {
-    "commander": "^9.1.0"
+    "commander": "^9.1.0",
+    "lodash": "^4.17.21"
   }
 }
