@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 import { Command } from 'commander';
-import { calculateTheDifferences, printTheDifferents } from './compare.js';
+import { calculateTheDifferences } from '../src/compare.js';
 
 const program = new Command();
 
@@ -12,7 +12,7 @@ program
   .option('-f, --format <type>', 'output format')
   .arguments('<filepath1> <filepath2>')
   .action((filepath1, filepath2) => {
-    printTheDifferents(calculateTheDifferences(filepath1, filepath2))
+    calculateTheDifferences(filepath1, filepath2)
   })
 
 program.parse();
