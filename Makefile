@@ -10,3 +10,6 @@ lint:
 
 test:
 	npx jest
+
+test-watch:
+	npm test -s -- --watch

@@ -2,8 +2,7 @@
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
-
-import calculateTheDifferences from '../src/compare.js'
+import gendiff from '../src/index.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const getFixturePath = (filename) => path.join(__dirname, '..', '__fixtures__', filename);
@@ -14,5 +13,5 @@ const path2 = getFixturePath('file2.json')
 const correct = readFile('correct.txt');
 
 test('gendiff', () => {
-    expect(calculateTheDifferences(path1, path2)).toEqual(correct);
+    expect(gendiff(path1, path2)).toEqual(correct);
 });

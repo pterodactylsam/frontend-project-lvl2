@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 import { Command } from 'commander';
-import { calculateTheDifferences } from '../src/compare.js';
+import calculateTheDifferences from '../src/compare.js';
 
 const program = new Command();
 
