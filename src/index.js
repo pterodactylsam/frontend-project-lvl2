@@ -2,11 +2,13 @@ import fs from 'fs';
 import path from 'path';
 import buildTree from './buildTree.js';
 import editTree from './editTree.js';
+import { fileURLToPath } from 'url';
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+const getPath = (filename) => path.join(__dirname, '..', '__fixtures__', filename);
 
 const getContentFromFile = (file) => {
-    // eslint disable process
-    // eslint-disable-next-line no-undef
-    const filePath = path.isAbsolute(file) ? file : path.resolve(process.cwd(), file)
+    const filePath = path.isAbsolute(file) ? file : getPath(file)
     const fileContent = (fs.readFileSync(filePath, 'utf8'));
     const readJson = JSON.parse(fileContent)
     return readJson
@@ -20,7 +22,5 @@ const gendiff = (filePath1, filePath2) => {
 
     return outputDiffInfo
 }
-
-console.log(gendiff('../__fixtures__/file1.json','../__fixtures__/file2.json'))
 
 export default gendiff;
