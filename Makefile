@@ -13,3 +13,6 @@ test:
 
 test-watch:
 	npm test -s -- --watch
+
+test-coverage: # Run coverage tests
+	npm test -- --coverage --coverageProvider=v8

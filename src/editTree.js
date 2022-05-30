@@ -18,12 +18,12 @@ const editTree = (tree) => {
             return `${state[0]} ${key}: ${value1} \n${tab}${state[1]} ${key}: ${value2}`
         }
     })
-    
-    console.log('{')
-    treeObj.map((value) => {
-        console.log(`${tab}${value}`)
+
+    const result = treeObj.map((value) => {
+        return `${tab}${value}`
     }) 
-    console.log('}')
+    
+    return ['{',`${result.join('\n')}`, '}'].join('\n');
 }
 
 export default editTree
