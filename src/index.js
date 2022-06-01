@@ -3,6 +3,7 @@ import path from 'path';
 import buildTree from './buildTree.js';
 import editTree from './editTree.js';
 import { fileURLToPath } from 'url';
+import parse from './parsers.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const getPath = (filename) => path.join(__dirname, '..', '__fixtures__', filename);
@@ -10,8 +11,8 @@ const getPath = (filename) => path.join(__dirname, '..', '__fixtures__', filenam
 const getContentFromFile = (file) => {
     const filePath = path.isAbsolute(file) ? file : getPath(file)
     const fileContent = (fs.readFileSync(filePath, 'utf8'));
-    const readJson = JSON.parse(fileContent)
-    return readJson
+    const extension = path.extname(filePath)
+    return parse(fileContent, extension)
 }
 
 const gendiff = (filePath1, filePath2) => {
