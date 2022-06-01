@@ -9,7 +9,7 @@ lint:
 	npx eslint .
 
 test:
-	npx jest
+	npx -n --experimental-vm-modules jest
 
 test-watch:
 	npm test -s -- --watch
