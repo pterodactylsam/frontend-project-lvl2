@@ -12,12 +12,13 @@ const buildTree = (file1, file2) => {
         if (!_.has(file2, key)) {
             return { key, state: 'deleted', value: file1[key] }
         }
-        if (!_.isEqual(file1[key], file2[key])) {
-            return { key, state: 'changed', value1: file1[key], value2: file2[key] }
-        }
         if (_.isObject(file1[key]) && _.isObject(file2[key])) {
             return { key, state: 'nested', value: buildTree(file1[key], file2[key])}
         }
+        if (!_.isEqual(file1[key], file2[key])) {
+            return { key, state: 'changed', value1: file1[key], value2: file2[key] }
+        }
+        
         return { key, state: 'notChanged', value: file1[key] }
     })
 

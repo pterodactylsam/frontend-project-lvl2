@@ -6,4 +6,5 @@
 
 Аскинемы проекта: <br>
 Проверка json файлов: https://asciinema.org/a/QZmIysJu269aJJDdMHnN5LWjU <br>
+Проверка вложенных json файлов: https://asciinema.org/a/t0gcYX5sk19KW2Xytw1luKqnQ <br>
 Проверка yml и yaml файлов: https://asciinema.org/a/M6Rx5Efu21LHf9FhIBsjR22qE <br>
