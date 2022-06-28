@@ -8,18 +8,32 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const getFixturePath = (filename) => path.join(__dirname, '..', '__fixtures__', filename);
 const readFile = (filename) => fs.readFileSync(getFixturePath(filename), 'utf8');
 
-test('gendiff ext-js', () => {
+test('gendiff correct-stylish, ext-js', () => {
     const path1 = getFixturePath('file1.json')
     const path2 = getFixturePath('file2.json')
-    const correctJs = readFile('correct-js.txt');
+    const correctJs = readFile('correct-stylish.txt');
     expect(gendiff(path1, path2)).toEqual(correctJs);
 });
 
-test('gendiff ext-yml, ext-yaml', () => {
+test('gendiff correct-plain, ext-json', () => {
+    const path1 = getFixturePath('file1.json')
+    const path2 = getFixturePath('file2.json')
+    const correctPlain = readFile('correct-plain.txt');
+    expect(gendiff(path1, path2,'plain')).toEqual(correctPlain);
+});
+
+test('gendiff correct-stylish, ext-yml, ext-yaml', () => {
     const path1 = getFixturePath('file1.yml')
     const path2 = getFixturePath('file2.yml')
-    const correctYml = readFile('correct-yml.txt');
+    const correctYml = readFile('correct-stylish.txt');
     expect(gendiff(path1, path2)).toEqual(correctYml);
+});
+
+test('gendiff correct-plain, ext-yml, ext-yaml', () => {
+    const path1 = getFixturePath('file1.yml')
+    const path2 = getFixturePath('file2.yml')
+    const correctPlain = readFile('correct-plain.txt');
+    expect(gendiff(path1, path2, 'plain')).toEqual(correctPlain);
 });
 
 test('gendiff wrong extension', () => {
