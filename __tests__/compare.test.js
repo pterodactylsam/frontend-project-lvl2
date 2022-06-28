@@ -22,6 +22,13 @@ test('gendiff correct-plain, ext-json', () => {
     expect(gendiff(path1, path2,'plain')).toEqual(correctPlain);
 });
 
+test('gendiff correct-json, ext-json', () => {
+    const path1 = getFixturePath('file1.json')
+    const path2 = getFixturePath('file2.json')
+    const correctPlain = readFile('correct-json.txt');
+    expect(gendiff(path1, path2,'json')).toEqual(correctPlain);
+});
+
 test('gendiff correct-stylish, ext-yml, ext-yaml', () => {
     const path1 = getFixturePath('file1.yml')
     const path2 = getFixturePath('file2.yml')
@@ -34,6 +41,13 @@ test('gendiff correct-plain, ext-yml, ext-yaml', () => {
     const path2 = getFixturePath('file2.yml')
     const correctPlain = readFile('correct-plain.txt');
     expect(gendiff(path1, path2, 'plain')).toEqual(correctPlain);
+});
+
+test('gendiff correct-json, ext-yml, ext-yaml', () => {
+    const path1 = getFixturePath('file1.yml')
+    const path2 = getFixturePath('file2.yml')
+    const correctPlain = readFile('correct-json.txt');
+    expect(gendiff(path1, path2, 'json')).toEqual(correctPlain);
 });
 
 test('gendiff wrong extension', () => {

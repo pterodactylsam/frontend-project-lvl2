@@ -15,13 +15,12 @@ const getContentFromFile = (file) => {
     return parse(fileContent, extension)
 }
 
-const gendiff = (filePath1, filePath2, format = 'stylish', option = {}) => {
-    const { replacer } = option;
+const gendiff = (filePath1, filePath2, format = 'stylish') => {
     const file1 = getContentFromFile(filePath1)
     const file2 = getContentFromFile(filePath2)
     const diffInfo = buildTree(file1, file2)
     // const outputDiffInfo = editTree(diffInfo)
-    const formattedTree = formatOutput(diffInfo, format, replacer)
+    const formattedTree = formatOutput(diffInfo, format)
 
     return formattedTree
 }
