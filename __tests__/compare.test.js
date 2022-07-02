@@ -53,7 +53,7 @@ test('gendiff correct-json, ext-yml, ext-yaml', () => {
 test('gendiff wrong extension', () => {
     const path1 = getFixturePath('file1-wrong.txt')
     const path2 = getFixturePath('file2-wrong.txt')
-    const error = new Error("Invalid file extension: '.txt'! Try supported formats.")
+    const error = new Error("Invalid file extension: 'txt'! Try supported formats.")
     expect(() => {
         gendiff(path1, path2);
       }).toThrow(error);
