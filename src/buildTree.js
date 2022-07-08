@@ -3,7 +3,7 @@ import _ from 'lodash';
 const buildTree = (file1, file2) => {
     const file1Keys = _.keys(file1)
     const file2Keys = _.keys(file2)
-    const sortedKeys = _.sortBy(_.uniq(_.union(file1Keys, file2Keys)))
+    const sortedKeys = _.sortBy(_.union(file1Keys, file2Keys))
 
     return sortedKeys.map((key) => {
         if (!_.has(file1, key)) {
